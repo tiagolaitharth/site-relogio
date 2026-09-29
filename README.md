@@ -11,6 +11,8 @@ Projeto de estudo desenvolvido em **Astro** para apresentar um relógio de luxo 
 ![Git](https://img.shields.io/badge/Git-versionamento-F05032?style=flat-square&logo=git&logoColor=white)
 ![Vercel](https://img.shields.io/badge/Vercel-deploy-000000?style=flat-square&logo=vercel&logoColor=white)
 
+### [Acessar demonstração na Vercel →](https://site-relogio-gold.vercel.app)
+
 </div>
 
 ![Relógio Venezianico Redentore Avventurina](src/assets/imagem3.png)
