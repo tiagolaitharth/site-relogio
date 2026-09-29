@@ -1,0 +1,654 @@
+---
+import logoGold from '../assets/venezianico-logo-gold.png';
+import logoWhite from '../assets/venezianico-logo-white.png';
+
+const ourWorldLinks = [
+	{ label: 'Our Story', href: '/pages/our-story' },
+	{ label: 'Journal', href: '/blogs/journal' },
+	{ label: 'Inspiration', href: '/pages/inspiration' },
+	{ label: 'Values', href: '/pages/values' },
+	{ label: 'The Club', href: '/pages/join-our-club' },
+];
+
+const collectionLinks = [
+	{ label: 'All Watches', href: '/collections/all-watches' },
+	{ label: 'Redentore', href: '/collections/redentore' },
+	{ label: 'Nereide', href: '/collections/nereide' },
+	{ label: 'Nereide GMT', href: '/collections/nereide-gmt' },
+	{ label: 'Nereide Ultraleggero', href: '/collections/nereide-ultraleggero' },
+	{ label: 'Arsenale', href: '/collections/arsenale' },
+	{ label: 'Bucintoro', href: '/collections/bucintoro' },
+	{ label: 'Limited Editions', href: '/pages/limited-editions' },
+	{ label: 'Accessories', href: '/collections/accessories' },
+];
+---
+
+<header class="site-header" data-site-header>
+	<div class="header-shell">
+		<div class="header-main-nav">
+			<button
+				class="icon-button menu-toggle"
+				type="button"
+				aria-label="Abrir menu"
+				aria-controls="mobile-menu"
+				aria-expanded="false"
+				data-menu-open
+			>
+				<svg aria-hidden="true" viewBox="0 0 22 22" width="22" height="22">
+					<path d="M1 5h20M1 11h20M1 17h20" />
+				</svg>
+			</button>
+
+			<a class="icon-button mobile-search" href="/search" aria-label="Buscar">
+				<svg aria-hidden="true" viewBox="0 0 22 22" width="22" height="22">
+					<circle cx="11" cy="10" r="7" />
+					<path d="m16 15 3 3" />
+				</svg>
+			</a>
+
+			<nav class="desktop-nav" aria-label="Navegação principal">
+				<ul>
+					<li>
+						<details class="nav-dropdown">
+							<summary>
+								OUR WORLD
+								<svg aria-hidden="true" viewBox="0 0 10 7" width="10" height="7">
+									<path d="m1 1 4 4 4-4" />
+								</svg>
+							</summary>
+							<div class="dropdown-panel">
+								<p class="dropdown-title">Our World</p>
+								<ul>
+									{ourWorldLinks.map((link) => (
+										<li><a href={link.href}>{link.label}</a></li>
+									))}
+								</ul>
+							</div>
+						</details>
+					</li>
+					<li>
+						<details class="nav-dropdown">
+							<summary>
+								COLLECTIONS
+								<svg aria-hidden="true" viewBox="0 0 10 7" width="10" height="7">
+									<path d="m1 1 4 4 4-4" />
+								</svg>
+							</summary>
+							<div class="dropdown-panel collections-panel">
+								<p class="dropdown-title">Collections</p>
+								<ul>
+									{collectionLinks.map((link) => (
+										<li><a href={link.href}>{link.label}</a></li>
+									))}
+								</ul>
+							</div>
+						</details>
+					</li>
+					<li><a href="/pages/atelier">OUR ATELIER</a></li>
+					<li><a href="/pages/stores">RETAILERS</a></li>
+				</ul>
+			</nav>
+		</div>
+
+		<a class="header-logo" href="/" aria-label="Venezianico — início">
+			<img class="logo logo-gold" src={logoGold.src} alt="Venezianico" width="1200" height="327" />
+			<img class="logo logo-white" src={logoWhite.src} alt="" width="1200" height="327" />
+		</a>
+
+		<nav class="header-actions" aria-label="Ações da conta">
+			<a class="icon-button desktop-action" href="/search" aria-label="Buscar">
+				<svg aria-hidden="true" viewBox="0 0 22 22" width="22" height="22">
+					<circle cx="11" cy="10" r="7" />
+					<path d="m16 15 3 3" />
+				</svg>
+			</a>
+			<a class="icon-button desktop-action" href="/account/login" aria-label="Entrar na conta">
+				<svg aria-hidden="true" viewBox="0 0 22 22" width="22" height="22">
+					<circle cx="11" cy="7" r="4" />
+					<path d="M3.5 19c1.421-2.974 4.247-5 7.5-5s6.079 2.026 7.5 5" />
+				</svg>
+			</a>
+			<a class="icon-button" href="/cart" aria-label="Carrinho">
+				<svg aria-hidden="true" viewBox="0 0 22 22" width="22" height="22">
+					<path class="cart-dots" d="M9.182 18.454a.91.91 0 1 1-1.818 0 .91.91 0 0 1 1.818 0Zm7.272 0a.91.91 0 1 1-1.818 0 .91.91 0 0 1 1.819 0Z" />
+					<path d="M5.336 6.636H21l-3.636 8.182H6.909L4.636 3H1" />
+				</svg>
+			</a>
+		</nav>
+	</div>
+
+	<script>
+		const header = document.querySelector('[data-site-header]');
+		const menu = document.querySelector('[data-mobile-menu]');
+		const openButton = document.querySelector('[data-menu-open]');
+		const closeButtons = document.querySelectorAll('[data-menu-close]');
+		const desktopDropdowns = document.querySelectorAll('.nav-dropdown');
+
+		const setHeaderState = () => {
+			header?.classList.toggle('is-scrolled', window.scrollY > 24);
+		};
+
+		const openMenu = () => {
+			if (!(menu instanceof HTMLElement) || !(openButton instanceof HTMLElement)) return;
+			menu.dataset.open = '';
+			menu.setAttribute('aria-hidden', 'false');
+			openButton.setAttribute('aria-expanded', 'true');
+			document.body.classList.add('menu-open');
+			const closeButton = menu.querySelector('[data-menu-close]');
+			if (closeButton instanceof HTMLElement) closeButton.focus();
+		};
+
+		const closeMenu = () => {
+			if (!(menu instanceof HTMLElement) || !(openButton instanceof HTMLElement)) return;
+			delete menu.dataset.open;
+			menu.setAttribute('aria-hidden', 'true');
+			openButton.setAttribute('aria-expanded', 'false');
+			document.body.classList.remove('menu-open');
+			openButton.focus();
+		};
+
+		openButton?.addEventListener('click', openMenu);
+		closeButtons.forEach((button) => button.addEventListener('click', closeMenu));
+		window.addEventListener('scroll', setHeaderState, { passive: true });
+		setHeaderState();
+
+		desktopDropdowns.forEach((dropdown) => {
+			dropdown.addEventListener('toggle', () => {
+				if (!(dropdown instanceof HTMLDetailsElement) || !dropdown.open) return;
+				desktopDropdowns.forEach((other) => {
+					if (other !== dropdown && other instanceof HTMLDetailsElement) other.open = false;
+				});
+			});
+		});
+
+		document.addEventListener('keydown', (event) => {
+			if (event.key !== 'Escape') return;
+			if (menu instanceof HTMLElement && menu.hasAttribute('data-open')) closeMenu();
+			desktopDropdowns.forEach((dropdown) => {
+				if (dropdown instanceof HTMLDetailsElement) dropdown.open = false;
+			});
+		});
+	</script>
+</header>
+
+<aside class="mobile-menu" id="mobile-menu" data-mobile-menu aria-hidden="true">
+	<button class="mobile-menu-backdrop" type="button" aria-label="Fechar menu" data-menu-close></button>
+	<div class="mobile-menu-panel" role="dialog" aria-modal="true" aria-labelledby="mobile-menu-title">
+		<div class="mobile-menu-heading">
+			<p id="mobile-menu-title">Menu</p>
+			<button class="mobile-menu-close" type="button" aria-label="Fechar menu" data-menu-close>
+				<svg aria-hidden="true" viewBox="0 0 24 24" width="21" height="21">
+					<path d="M17.658 6.343 6.344 17.657M17.658 17.657 6.344 6.343" />
+				</svg>
+			</button>
+		</div>
+
+		<nav aria-label="Navegação mobile">
+			<details>
+				<summary>OUR WORLD <span aria-hidden="true">+</span></summary>
+				<ul>
+					{ourWorldLinks.map((link) => (
+						<li><a href={link.href}>{link.label}</a></li>
+					))}
+				</ul>
+			</details>
+			<details>
+				<summary>COLLECTIONS <span aria-hidden="true">+</span></summary>
+				<ul>
+					{collectionLinks.map((link) => (
+						<li><a href={link.href}>{link.label}</a></li>
+					))}
+				</ul>
+			</details>
+			<a class="mobile-primary-link" href="/pages/atelier">OUR ATELIER</a>
+			<a class="mobile-primary-link" href="/pages/stores">RETAILERS</a>
+		</nav>
+
+		<div class="mobile-menu-footer">
+			<a href="/search">Search</a>
+			<a href="/account">Account</a>
+		</div>
+	</div>
+</aside>
+
+<style>
+	@font-face {
+		font-family: 'Montserrat Local';
+		src: url('../assets/montserrat-regular.woff2') format('woff2');
+		font-style: normal;
+		font-weight: 400;
+		font-display: swap;
+	}
+
+	@font-face {
+		font-family: 'Montserrat Local';
+		src: url('../assets/montserrat-bold.woff2') format('woff2');
+		font-style: normal;
+		font-weight: 700;
+		font-display: swap;
+	}
+
+	.site-header,
+	.site-header *,
+	.mobile-menu,
+	.mobile-menu * {
+		box-sizing: border-box;
+	}
+
+	.site-header {
+		position: fixed;
+		inset: 0 0 auto;
+		z-index: 50;
+		color: #fff;
+		font-family: 'Montserrat Local', Montserrat, Arial, sans-serif;
+		background: linear-gradient(180deg, rgb(0 0 0 / 35%) 0%, transparent 100%);
+		transition: color 250ms ease, background-color 250ms ease, box-shadow 250ms ease;
+	}
+
+	.site-header.is-scrolled {
+		color: #fff;
+		background: linear-gradient(
+			180deg,
+			rgb(4 2 8 / 68%) 0%,
+			rgb(4 2 8 / 34%) 72%,
+			transparent 100%
+		);
+		box-shadow: none;
+		backdrop-filter: blur(10px) saturate(115%);
+	}
+
+	.header-shell {
+		display: grid;
+		grid-template-areas: 'main logo actions';
+		grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+		align-items: center;
+		min-height: 63px;
+		padding: 18px 20px;
+	}
+
+	.header-main-nav {
+		grid-area: main;
+		display: flex;
+		align-items: center;
+		gap: 12px;
+	}
+
+	.header-logo {
+		grid-area: logo;
+		position: relative;
+		display: block;
+		width: 100px;
+		aspect-ratio: 1200 / 327;
+	}
+
+	.logo {
+		position: absolute;
+		inset: 0;
+		display: block;
+		width: 100%;
+		height: 100%;
+		object-fit: contain;
+		transition: opacity 250ms ease;
+	}
+
+	.logo-gold {
+		opacity: 0;
+	}
+
+	.logo-white {
+		opacity: 1;
+	}
+
+	.header-actions {
+		grid-area: actions;
+		display: flex;
+		justify-content: flex-end;
+		align-items: center;
+		gap: 7px;
+	}
+
+	.icon-button {
+		display: inline-grid;
+		place-items: center;
+		width: 42px;
+		height: 42px;
+		padding: 0;
+		border: 0;
+		color: inherit;
+		background: transparent;
+		text-decoration: none;
+		cursor: pointer;
+	}
+
+	.icon-button svg,
+	.mobile-menu svg {
+		fill: none;
+		stroke: currentColor;
+		stroke-width: 2;
+		stroke-linecap: round;
+		stroke-linejoin: round;
+	}
+
+	.icon-button .cart-dots {
+		fill: currentColor;
+		stroke: none;
+	}
+
+	.desktop-nav {
+		display: none;
+	}
+
+	.desktop-action {
+		display: none;
+	}
+
+	.mobile-search {
+		display: inline-grid;
+	}
+
+	.mobile-menu {
+		position: fixed;
+		inset: 0;
+		z-index: 80;
+		visibility: hidden;
+		font-family: 'Montserrat Local', Montserrat, Arial, sans-serif;
+		pointer-events: none;
+	}
+
+	.mobile-menu[data-open] {
+		visibility: visible;
+		pointer-events: auto;
+	}
+
+	.mobile-menu-backdrop {
+		position: absolute;
+		inset: 0;
+		width: 100%;
+		border: 0;
+		background: rgb(0 0 0 / 55%);
+		opacity: 0;
+		transition: opacity 300ms ease;
+	}
+
+	.mobile-menu[data-open] .mobile-menu-backdrop {
+		opacity: 1;
+	}
+
+	.mobile-menu-panel {
+		position: relative;
+		display: flex;
+		flex-direction: column;
+		width: min(420px, 92vw);
+		height: 100%;
+		padding: 24px 28px 30px;
+		color: #171717;
+		background: #f8f6f0;
+		box-shadow: 20px 0 60px rgb(0 0 0 / 25%);
+		transform: translateX(-102%);
+		transition: transform 350ms cubic-bezier(.22, 1, .36, 1);
+		overflow-y: auto;
+	}
+
+	.mobile-menu[data-open] .mobile-menu-panel {
+		transform: translateX(0);
+	}
+
+	.mobile-menu-heading {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		padding-bottom: 24px;
+		border-bottom: 1px solid rgb(0 0 0 / 13%);
+	}
+
+	.mobile-menu-heading p {
+		margin: 0;
+		font-size: 12px;
+		font-weight: 700;
+		letter-spacing: .16em;
+		text-transform: uppercase;
+	}
+
+	.mobile-menu-close {
+		display: grid;
+		place-items: center;
+		width: 42px;
+		height: 42px;
+		padding: 0;
+		border: 0;
+		color: inherit;
+		background: transparent;
+		cursor: pointer;
+	}
+
+	.mobile-menu nav {
+		padding: 20px 0;
+	}
+
+	.mobile-menu details {
+		border-bottom: 1px solid rgb(0 0 0 / 11%);
+	}
+
+	.mobile-menu summary,
+	.mobile-primary-link {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		padding: 18px 0;
+		color: inherit;
+		font-size: 16px;
+		font-weight: 700;
+		letter-spacing: .04em;
+		list-style: none;
+		text-decoration: none;
+		cursor: pointer;
+	}
+
+	.mobile-menu summary::-webkit-details-marker {
+		display: none;
+	}
+
+	.mobile-menu details[open] summary span {
+		transform: rotate(45deg);
+	}
+
+	.mobile-menu details ul {
+		display: grid;
+		gap: 14px;
+		margin: 0;
+		padding: 0 0 20px;
+		list-style: none;
+	}
+
+	.mobile-menu details a,
+	.mobile-menu-footer a {
+		color: #5f5c56;
+		font-size: 14px;
+		text-decoration: none;
+	}
+
+	.mobile-primary-link {
+		border-bottom: 1px solid rgb(0 0 0 / 11%);
+	}
+
+	.mobile-menu-footer {
+		display: flex;
+		gap: 24px;
+		margin-top: auto;
+		padding-top: 24px;
+		border-top: 1px solid rgb(0 0 0 / 13%);
+	}
+
+	:global(body.menu-open) {
+		overflow: hidden;
+	}
+
+	.site-header a:focus-visible,
+	.site-header button:focus-visible,
+	.site-header summary:focus-visible,
+	.mobile-menu a:focus-visible,
+	.mobile-menu button:focus-visible,
+	.mobile-menu summary:focus-visible {
+		outline: 2px solid #a38b61;
+		outline-offset: 3px;
+	}
+
+	@media (min-width: 700px) {
+		.mobile-search {
+			display: none;
+		}
+
+		.desktop-action {
+			display: inline-grid;
+		}
+	}
+
+	@media (min-width: 1150px) {
+		.header-shell {
+			grid-template-areas: 'logo main actions';
+			grid-template-columns: minmax(0, 1fr) fit-content(70%) minmax(0, 1fr);
+			min-height: 110px;
+			padding: 34px 40px;
+		}
+
+		.header-logo {
+			width: 155px;
+			justify-self: start;
+		}
+
+		.header-main-nav {
+			justify-content: center;
+		}
+
+		.menu-toggle {
+			display: none;
+		}
+
+		.desktop-nav {
+			display: block;
+		}
+
+		.desktop-nav > ul {
+			display: flex;
+			align-items: center;
+			gap: clamp(18px, 2.3vw, 38px);
+			margin: 0;
+			padding: 0;
+			list-style: none;
+		}
+
+		.desktop-nav a,
+		.nav-dropdown summary {
+			color: inherit;
+			font-size: 11px;
+			font-weight: 700;
+			letter-spacing: .08em;
+			text-decoration: none;
+			white-space: nowrap;
+		}
+
+		.desktop-nav > ul > li > a,
+		.nav-dropdown > summary {
+			position: relative;
+			padding: 12px 0;
+		}
+
+		.desktop-nav > ul > li > a::after,
+		.nav-dropdown > summary::after {
+			position: absolute;
+			inset: auto 0 5px;
+			height: 1px;
+			background: currentColor;
+			content: '';
+			transform: scaleX(0);
+			transform-origin: right;
+			transition: transform 200ms ease;
+		}
+
+		.desktop-nav > ul > li > a:hover::after,
+		.nav-dropdown > summary:hover::after,
+		.nav-dropdown[open] > summary::after {
+			transform: scaleX(1);
+			transform-origin: left;
+		}
+
+		.nav-dropdown {
+			position: relative;
+		}
+
+		.nav-dropdown summary {
+			display: flex;
+			align-items: center;
+			gap: 10px;
+			list-style: none;
+			cursor: pointer;
+		}
+
+		.nav-dropdown summary::-webkit-details-marker {
+			display: none;
+		}
+
+		.nav-dropdown summary svg {
+			fill: none;
+			stroke: currentColor;
+			stroke-width: 2;
+			transition: transform 200ms ease;
+		}
+
+		.nav-dropdown[open] summary svg {
+			transform: rotate(180deg);
+		}
+
+		.dropdown-panel {
+			position: absolute;
+			top: calc(100% + 21px);
+			left: -28px;
+			width: 280px;
+			padding: 28px;
+			color: #171717;
+			background: #fff;
+			box-shadow: 0 22px 50px rgb(0 0 0 / 18%);
+		}
+
+		.collections-panel {
+			width: 530px;
+		}
+
+		.dropdown-title {
+			margin: 0 0 18px;
+			color: #a38b61;
+			font-size: 10px;
+			font-weight: 700;
+			letter-spacing: .18em;
+			text-transform: uppercase;
+		}
+
+		.dropdown-panel ul {
+			display: grid;
+			grid-template-columns: repeat(2, minmax(0, 1fr));
+			gap: 14px 24px;
+			margin: 0;
+			padding: 0;
+			list-style: none;
+		}
+
+		.dropdown-panel:not(.collections-panel) ul {
+			grid-template-columns: 1fr;
+		}
+
+		.dropdown-panel a {
+			font-size: 13px;
+			font-weight: 400;
+			letter-spacing: 0;
+		}
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.site-header,
+		.logo,
+		.mobile-menu-backdrop,
+		.mobile-menu-panel {
+			transition: none;
+		}
+	}
+</style>

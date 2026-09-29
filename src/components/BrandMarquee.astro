@@ -1,0 +1,106 @@
+<div class="section section-blends section-full">
+	<div class="scrolling-text scrolling-text--scroll">
+		<div class="scrolling-text__wrapper">
+			<span class="scrolling-text__text heading"><span class="text-gradient">The Renaissance of Watchmaking</span></span>
+			<span class="scrolling-text__text heading motion-reduce:hidden" aria-hidden="true"><span class="text-gradient">The Renaissance of Watchmaking</span></span>
+			<span class="scrolling-text__text heading motion-reduce:hidden" aria-hidden="true"><span class="text-gradient">The Renaissance of Watchmaking</span></span>
+			<span class="scrolling-text__text heading motion-reduce:hidden" aria-hidden="true"><span class="text-gradient">The Renaissance of Watchmaking</span></span>
+			<span class="scrolling-text__text heading motion-reduce:hidden" aria-hidden="true"><span class="text-gradient">The Renaissance of Watchmaking</span></span>
+			<span class="scrolling-text__text heading motion-reduce:hidden" aria-hidden="true"><span class="text-gradient">The Renaissance of Watchmaking</span></span>
+			<span class="scrolling-text__text heading motion-reduce:hidden" aria-hidden="true"><span class="text-gradient">The Renaissance of Watchmaking</span></span>
+			<span class="scrolling-text__text heading motion-reduce:hidden" aria-hidden="true"><span class="text-gradient">The Renaissance of Watchmaking</span></span>
+			<span class="scrolling-text__text heading motion-reduce:hidden" aria-hidden="true"><span class="text-gradient">The Renaissance of Watchmaking</span></span>
+			<span class="scrolling-text__text heading motion-reduce:hidden" aria-hidden="true"><span class="text-gradient">The Renaissance of Watchmaking</span></span>
+		</div>
+	</div>
+</div>
+
+<style>
+	.section-full {
+		width: 100%;
+		overflow: hidden;
+		background-color: #000000;
+	}
+
+	.scrolling-text {
+		overflow: hidden;
+		white-space: nowrap;
+		padding: 21px 0;
+		display: flex;
+		align-items: center;
+		border-top: 1px solid rgba(255, 255, 255, 0.05);
+		border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+	}
+
+	.scrolling-text__wrapper {
+		display: flex;
+		white-space: nowrap;
+		animation: marquee 40s linear infinite;
+		min-width: max-content;
+	}
+
+	.scrolling-text__text {
+		font-family: var(--font-display);
+		font-style: normal;
+		font-size: 1.3rem;
+		font-weight: 400;
+		line-height: 1.15;
+		text-transform: uppercase;
+		letter-spacing: 0.22em;
+		padding: 0 36px;
+		display: inline-block;
+		flex-shrink: 0;
+	}
+
+	.scrolling-text__text::after {
+		content: '✦';
+		display: inline-block;
+		margin-left: 36px;
+		color: #6f7279;
+		font-size: 0.48em;
+		line-height: 1;
+		vertical-align: 0.18em;
+	}
+
+	.text-gradient {
+		background: linear-gradient(90deg, #55585f 0%, #8f9299 48%, #5c5f66 100%);
+		-webkit-background-clip: text;
+		-webkit-text-fill-color: transparent;
+		background-clip: text;
+	}
+
+	@keyframes marquee {
+		0% {
+			transform: translate3d(0, 0, 0);
+		}
+
+		100% {
+			transform: translate3d(-50%, 0, 0);
+		}
+	}
+
+	@media (max-width: 768px) {
+		.scrolling-text__text {
+			font-size: 1.075rem;
+			padding: 0 24px;
+		}
+
+		.scrolling-text__text::after {
+			margin-left: 24px;
+		}
+
+		.scrolling-text {
+			padding: 17px 0;
+		}
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.scrolling-text__wrapper {
+			animation: none;
+		}
+
+		.motion-reduce\:hidden {
+			display: none;
+		}
+	}
+</style>

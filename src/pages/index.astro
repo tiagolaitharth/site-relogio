@@ -1,11 +1,32 @@
 ---
-import Welcome from '../components/Welcome.astro';
+import Intro from '../components/Intro.astro';
+import Header from '../components/Header.astro';
+import Parallax from '../components/Parallax.astro';
+import HeroProduct from '../components/HeroProduct.astro';
+import BrandMarquee from '../components/BrandMarquee.astro';
+import AmbientVideo from '../components/AmbientVideo.astro';
+import TechnicalSpecs from '../components/TechnicalSpecs.astro';
+import EditorialGallery from '../components/EditorialGallery.astro';
+import SiteFooter from '../components/SiteFooter.astro';
 import Layout from '../layouts/Layout.astro';
-
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
 ---
 
-<Layout>
-	<Welcome />
+<Layout title="Venezianico">
+	<Header />
+
+	<main>
+		<Intro />
+		<Parallax />
+		<HeroProduct />
+		<BrandMarquee />
+		<AmbientVideo />
+		<TechnicalSpecs />
+		<EditorialGallery />
+	</main>
+
+	<SiteFooter />
+
+	<script>
+		import '../scripts/main.js';
+	</script>
 </Layout>

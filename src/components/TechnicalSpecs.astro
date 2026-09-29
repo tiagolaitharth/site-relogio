@@ -1,0 +1,166 @@
+<section class="specs-section" id="especificacoes-detalhadas">
+	<div class="specs-container">
+		<div class="specs-grid">
+			<div class="specs-info">
+				<div class="specs-badge">Especificações</div>
+				<h2 class="specs-title">Detalhes Técnicos</h2>
+				<p class="specs-subtitle">ENGENHARIA, MATERIAIS E ACABAMENTO.</p>
+
+				<div class="specs-list">
+					<div class="specs-row"><span class="specs-label">Movimento</span><span class="specs-value">Automático Seiko NH35A</span></div>
+					<div class="specs-row"><span class="specs-label">Material da Caixa</span><span class="specs-value">Aço inoxidável 316L</span></div>
+					<div class="specs-row"><span class="specs-label">Dimensões</span><span class="specs-value">40 mm de diâmetro, 46,7 mm de ponta a ponta</span></div>
+					<div class="specs-row"><span class="specs-label">Espessura</span><span class="specs-value">11 mm</span></div>
+					<div class="specs-row"><span class="specs-label">Mostrador</span><span class="specs-value">Vidro aventurina com efeito cintilante</span></div>
+					<div class="specs-row"><span class="specs-label">Cristal</span><span class="specs-value">Safira com revestimento antirreflexo</span></div>
+					<div class="specs-row"><span class="specs-label">Luneta</span><span class="specs-value">Aço inoxidável 316L</span></div>
+					<div class="specs-row"><span class="specs-label">Case Back</span><span class="specs-value">Fechado em aço</span></div>
+					<div class="specs-row"><span class="specs-label">Resistência à Água</span><span class="specs-value">5 ATM (50 metros)</span></div>
+					<div class="specs-row"><span class="specs-label">Pulseira</span><span class="specs-value">Couro legítimo, fabricado na Itália</span></div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+<style>
+	@font-face {
+		font-family: 'EB Garamond Specs';
+		src: url('../assets/eb-garamond-medium-italic.woff2') format('woff2');
+		font-style: italic;
+		font-weight: 500;
+		font-display: swap;
+	}
+
+	@font-face {
+		font-family: 'Montserrat Specs';
+		src: url('../assets/montserrat-regular.woff2') format('woff2');
+		font-style: normal;
+		font-weight: 400;
+		font-display: swap;
+	}
+
+	@font-face {
+		font-family: 'Montserrat Specs';
+		src: url('../assets/montserrat-bold.woff2') format('woff2');
+		font-style: normal;
+		font-weight: 600;
+		font-display: swap;
+	}
+
+	.specs-section {
+		background: #000;
+		color: #fff;
+		padding: 140px 0;
+		position: relative;
+		z-index: 6;
+		font-family: 'Montserrat Specs', Montserrat, Arial, sans-serif;
+	}
+
+	.specs-container {
+		width: 100%;
+		max-width: var(--max-width);
+		margin: 0 auto;
+		padding: 0 60px;
+		box-sizing: border-box;
+	}
+
+	.specs-grid {
+		display: block;
+	}
+
+	.specs-info {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		max-width: 800px;
+		margin: 0 auto;
+	}
+
+	.specs-badge {
+		font-size: 11px;
+		font-weight: 600;
+		letter-spacing: 0.25em;
+		text-transform: uppercase;
+		color: var(--lavender);
+		margin-bottom: 16px;
+	}
+
+	.specs-title {
+		font-family: 'EB Garamond Specs', Georgia, serif;
+		font-size: clamp(28px, 4vw, 44px);
+		font-weight: 500;
+		font-style: italic;
+		color: var(--white);
+		text-align: center;
+		margin: 0;
+	}
+
+	.specs-subtitle {
+		color: rgba(255, 255, 255, 0.5);
+		text-align: center;
+		margin: 8px 0 40px;
+		font-size: 10px;
+		letter-spacing: 0.08em;
+		text-transform: uppercase;
+	}
+
+	.specs-list {
+		width: 100%;
+	}
+
+	.specs-row {
+		display: flex;
+		justify-content: space-between;
+		align-items: baseline;
+		padding: 20px 0;
+		border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+		transition: border-color 0.3s ease;
+	}
+
+	.specs-row:hover {
+		border-color: rgba(0, 85, 255, 0.4);
+	}
+
+	.specs-label {
+		font-size: 13px;
+		font-weight: 500;
+		color: rgba(255, 255, 255, 0.5);
+		text-transform: uppercase;
+		letter-spacing: 0.1em;
+	}
+
+	.specs-value {
+		font-size: 15px;
+		font-weight: 400;
+		color: var(--white);
+		text-align: right;
+		max-width: 60%;
+		letter-spacing: 0.01em;
+	}
+
+	@media (max-width: 1024px) {
+		.specs-section {
+			padding: 100px 0;
+		}
+	}
+
+	@media (max-width: 580px) {
+		.specs-container {
+			padding: 0 24px;
+		}
+
+		.specs-row {
+			flex-direction: column;
+			align-items: flex-start;
+			gap: 8px;
+			padding: 16px 0;
+		}
+
+		.specs-value {
+			text-align: left;
+			max-width: 100%;
+			font-size: 14px;
+		}
+	}
+</style>

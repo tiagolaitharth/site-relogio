@@ -1,0 +1,98 @@
+<section class="gallery-section">
+	<div class="gallery-container">
+		<div class="gallery-grid">
+			<div class="gallery-item">
+				<img
+					src="https://www.venezianico.com/cdn/shop/files/DeskMob_6_1250x1250_2a878e06-4595-4c56-bfaf-520c294f20e7.png?v=1738139403&width=800"
+					alt="Venezianico Avventurina Detail View"
+					loading="lazy"
+				/>
+			</div>
+			<div class="gallery-item">
+				<img
+					src="https://www.venezianico.com/cdn/shop/files/1_12.png?v=1738139403&width=800"
+					alt="Venezianico Redentore Dial Craft"
+					loading="lazy"
+				/>
+			</div>
+			<div class="gallery-item">
+				<img
+					src="https://www.venezianico.com/cdn/shop/files/DeskMob_7_1250x1250_49be77ff-6c25-4c1d-8750-930e5a65692f.png?v=1738139403&width=800"
+					alt="Venezianico Engraved Caseback"
+					loading="lazy"
+				/>
+			</div>
+			<div class="gallery-item">
+				<img
+					src="https://www.venezianico.com/cdn/shop/files/1_1_4be53788-d56c-452f-b01c-367d36f278b3.png?v=1738139403&width=800"
+					alt="Venezianico Redentore Presentation"
+					loading="lazy"
+				/>
+			</div>
+		</div>
+	</div>
+</section>
+
+<style>
+	.gallery-section {
+		background-color: #000000;
+		padding: 80px 0;
+		border-top: 1px solid rgba(255, 255, 255, 0.05);
+	}
+
+	.gallery-container {
+		width: 100%;
+		max-width: var(--max-width);
+		margin: 0 auto;
+		padding: 0 80px;
+		box-sizing: border-box;
+	}
+
+	.gallery-grid {
+		display: grid;
+		grid-template-columns: repeat(4, 1fr);
+		gap: 32px;
+	}
+
+	.gallery-item {
+		overflow: hidden;
+		position: relative;
+		box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+		background-color: #0c0916;
+		aspect-ratio: 1 / 1;
+	}
+
+	.gallery-item img {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		display: block;
+		transition: transform 0.8s var(--ease-out);
+	}
+
+	.gallery-item:hover img {
+		transform: scale(1.05);
+	}
+
+	@media (max-width: 1024px) {
+		.gallery-container {
+			padding: 0 40px;
+		}
+
+		.gallery-grid {
+			grid-template-columns: repeat(2, 1fr);
+			gap: 24px;
+		}
+	}
+
+	@media (max-width: 768px) {
+		.gallery-grid {
+			grid-template-columns: 1fr;
+			gap: 20px;
+		}
+
+		.gallery-section {
+			padding: 48px 0;
+		}
+	}
+</style>

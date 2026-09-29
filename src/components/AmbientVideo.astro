@@ -1,0 +1,115 @@
+<section class="video-section section-full" data-ambient-video-section>
+	<div class="video-container">
+		<div class="video-frame">
+			<video autoplay muted loop playsinline class="ambient-video">
+				<source
+					src="https://www.venezianico.com/cdn/shop/videos/c/vp/ae83d3a08e4d48c4af8fcbf3c1f29c25/ae83d3a08e4d48c4af8fcbf3c1f29c25.HD-1080p-7.2Mbps-39247645.mp4?v=0"
+					type="video/mp4"
+				/>
+				Seu navegador não suporta a reprodução de vídeos.
+			</video>
+			<div class="video-overlay" aria-hidden="true"></div>
+		</div>
+	</div>
+</section>
+
+<style>
+	.video-section {
+		--ambient-width: 72vw;
+		--ambient-height: 66vh;
+		--ambient-radius: 16px;
+		width: 100%;
+		height: 200vh;
+		overflow: clip;
+		position: relative;
+		border-top: 1px solid rgba(255, 255, 255, 0.05);
+		border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+		background-color: #000000;
+	}
+
+	.video-container {
+		width: 100%;
+		height: 100vh;
+		height: 100dvh;
+		position: sticky;
+		top: 0;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		background-color: #000000;
+		overflow: hidden;
+	}
+
+	.video-frame {
+		width: var(--ambient-width);
+		height: var(--ambient-height);
+		position: relative;
+		overflow: hidden;
+		border-radius: var(--ambient-radius);
+		background-color: #000000;
+		box-shadow: 0 18px 70px rgba(0, 0, 0, 0.45), 0 0 0 1px rgba(255, 255, 255, 0.05);
+		will-change: width, height, border-radius;
+	}
+
+	.ambient-video {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		object-position: center;
+		display: block;
+	}
+
+	.video-overlay {
+		position: absolute;
+		inset: 0;
+		background: linear-gradient(to bottom, rgba(4, 2, 8, 0.4) 0%, transparent 50%, rgba(4, 2, 8, 0.4) 100%);
+		pointer-events: none;
+	}
+
+	@media (max-width: 768px) {
+		.video-section {
+			--ambient-width: 88vw;
+			--ambient-height: 58vh;
+			--ambient-radius: 12px;
+			height: 180vh;
+		}
+	}
+</style>
+
+<script>
+	const ambientSections = document.querySelectorAll<HTMLElement>('[data-ambient-video-section]');
+	let ambientFrame = 0;
+
+	const updateAmbientVideo = () => {
+		ambientFrame = 0;
+		const viewportWidth = window.innerWidth;
+		const viewportHeight = window.innerHeight;
+		const isMobile = window.matchMedia('(max-width: 768px)').matches;
+		const initialWidth = viewportWidth * (isMobile ? 0.88 : 0.72);
+		const initialHeight = viewportHeight * (isMobile ? 0.58 : 0.66);
+		const initialRadius = isMobile ? 12 : 16;
+
+		ambientSections.forEach((section) => {
+			const rect = section.getBoundingClientRect();
+			const scrollRange = Math.max(1, section.offsetHeight - viewportHeight);
+			const progress = Math.max(0, Math.min(1, -rect.top / scrollRange));
+			const easedProgress = progress * progress * (3 - 2 * progress);
+			const currentWidth = initialWidth + (viewportWidth - initialWidth) * easedProgress;
+			const currentHeight = initialHeight + (viewportHeight - initialHeight) * easedProgress;
+			const currentRadius = initialRadius * (1 - easedProgress);
+
+			section.style.setProperty('--ambient-width', `${currentWidth.toFixed(2)}px`);
+			section.style.setProperty('--ambient-height', `${currentHeight.toFixed(2)}px`);
+			section.style.setProperty('--ambient-radius', `${currentRadius.toFixed(2)}px`);
+		});
+	};
+
+	const requestAmbientUpdate = () => {
+		if (ambientFrame) return;
+		ambientFrame = window.requestAnimationFrame(updateAmbientVideo);
+	};
+
+	window.addEventListener('scroll', requestAmbientUpdate, { passive: true });
+	window.addEventListener('resize', requestAmbientUpdate);
+	updateAmbientVideo();
+</script>
