@@ -157,13 +157,89 @@ import layer6 from '../assets/parallax/6.png';
 	}
 
 	@media (max-width: 580px) {
+		.parallax-section {
+			height: 220svh;
+		}
+
+		.parallax-container {
+			height: 100svh;
+		}
+
+		.parallax-container::after {
+			height: 34svh;
+			background: linear-gradient(to top, #000 0%, rgb(0 0 0 / 72%) 28%, transparent 100%);
+		}
+
+		.parallax-layer:not(.layer-6) {
+			left: -80%;
+			bottom: -4%;
+			width: 260%;
+			height: auto;
+			aspect-ratio: 2752 / 1536;
+			object-fit: contain;
+			object-position: center bottom;
+		}
+
+		.layer-1 {
+			left: -143%;
+			bottom: -7%;
+			width: 306%;
+		}
+
+		.layer-2 {
+			left: -82%;
+			bottom: -5%;
+			width: 264%;
+		}
+
+		.layer-3 {
+			left: -77%;
+			bottom: 0;
+			width: 254%;
+		}
+
+		.layer-4 {
+			left: -72%;
+			bottom: 7%;
+			width: 244%;
+		}
+
+		.layer-5 {
+			left: -67%;
+			bottom: 15%;
+			width: 234%;
+		}
+
+		.layer-6 {
+			top: 0;
+			left: -85%;
+			width: 270%;
+			height: 100%;
+			object-fit: cover;
+			object-position: center top;
+		}
+
 		.parallax-text-overlay {
-			top: 20%;
-			padding: 0 24px;
+			top: 31%;
+			width: 100%;
+			max-width: 430px;
+			padding: 0 28px;
 		}
 
 		.parallax-title {
-			font-size: 32px;
+			margin-bottom: 14px;
+			font-size: clamp(32px, 10vw, 40px);
+		}
+
+		.parallax-badge {
+			margin-bottom: 12px;
+			font-size: 10px;
+		}
+
+		.parallax-description {
+			max-width: 35ch;
+			font-size: 13px;
+			line-height: 1.65;
 		}
 	}
 </style>

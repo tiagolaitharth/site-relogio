@@ -54,7 +54,8 @@ const pLayers = [
 	document.getElementById('p-layer6'),
 ];
 const pText = document.getElementById('p-text');
-const maxOffsets = [880, 660, 440, 250, 100, 15];
+const mobileParallaxQuery = window.matchMedia('(max-width: 580px)');
+const tabletParallaxQuery = window.matchMedia('(max-width: 1024px)');
 let parallaxFrameRequested = false;
 
 const updateParallax = () => {
@@ -63,16 +64,26 @@ const updateParallax = () => {
 	const rect = parallaxSection.getBoundingClientRect();
 	const sectionHeight = parallaxSection.offsetHeight;
 	const viewHeight = window.innerHeight;
-	const progress = Math.max(0, Math.min(1, -rect.top / (sectionHeight - viewHeight)));
+	const scrollDistance = Math.max(1, sectionHeight - viewHeight);
+	const progress = Math.max(0, Math.min(1, -rect.top / scrollDistance));
 	const factor = 1 - progress;
+	const isMobile = mobileParallaxQuery.matches;
+	const isTablet = tabletParallaxQuery.matches;
+	const maxOffsets = isMobile
+		? [300, 230, 170, 115, 65, 12]
+		: isTablet
+			? [540, 420, 310, 200, 90, 15]
+			: [880, 660, 440, 250, 100, 15];
+	const scaleDepth = isMobile ? 0.04 : isTablet ? 0.065 : 0.09;
 
 	pLayers.forEach((layer, index) => {
 		const yTranslate = maxOffsets[index] * factor;
-		const scale = 1 + (0.09 * factor * (6 - index)) / 5;
+		const scale = 1 + (scaleDepth * factor * (6 - index)) / 5;
 		layer.style.transform = `translate3d(0, ${yTranslate}px, 0) scale(${scale})`;
 	});
 
-	const textOffset = 240 * factor;
+	const maxTextOffset = isMobile ? 105 : isTablet ? 160 : 240;
+	const textOffset = maxTextOffset * factor;
 	let opacity = 0;
 	let blur = 12;
 
