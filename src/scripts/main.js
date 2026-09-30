@@ -62,7 +62,7 @@ const updateParallax = () => {
 	if (!parallaxSection || !pText || pLayers.some((layer) => !layer)) return;
 
 	const rect = parallaxSection.getBoundingClientRect();
-	const sectionHeight = parallaxSection.offsetHeight;
+	const sectionHeight = rect.height;
 	const viewHeight = window.innerHeight;
 	const scrollDistance = Math.max(1, sectionHeight - viewHeight);
 	const progress = Math.max(0, Math.min(1, -rect.top / scrollDistance));

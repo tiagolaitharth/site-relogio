@@ -1,4 +1,5 @@
 ---
+import { Image } from 'astro:assets';
 import layer1 from '../assets/parallax/1.png';
 import layer2 from '../assets/parallax/2.png';
 import layer3 from '../assets/parallax/3.png';
@@ -9,11 +10,11 @@ import layer6 from '../assets/parallax/6.png';
 
 <section class="parallax-section" id="artesanal">
 	<div class="parallax-container">
-		<img src={layer6.src} alt="Céu e Distância" class="parallax-layer layer-6" id="p-layer6" style="z-index:10;" />
-		<img src={layer5.src} alt="Montanhas Distantes" class="parallax-layer layer-5" id="p-layer5" style="z-index:20;" />
-		<img src={layer4.src} alt="Montanhas Intermediárias" class="parallax-layer layer-4" id="p-layer4" style="z-index:30;" />
-		<img src={layer3.src} alt="Montanhas Próximas" class="parallax-layer layer-3" id="p-layer3" style="z-index:40;" />
-		<img src={layer2.src} alt="Montanhas em Foco" class="parallax-layer layer-2" id="p-layer2" style="z-index:50;" />
+		<Image src={layer6} alt="Céu e Distância" class="parallax-layer layer-6" id="p-layer6" style="z-index:10;" format="webp" quality={70} widths={[960, 1440, 1920, 2752]} sizes="(max-width: 580px) 960px, 116vw" loading="lazy" decoding="async" fetchpriority="low" />
+		<Image src={layer5} alt="Montanhas Distantes" class="parallax-layer layer-5" id="p-layer5" style="z-index:20;" format="webp" quality={70} widths={[960, 1440, 1920, 2752]} sizes="(max-width: 580px) 960px, 116vw" loading="lazy" decoding="async" fetchpriority="low" />
+		<Image src={layer4} alt="Montanhas Intermediárias" class="parallax-layer layer-4" id="p-layer4" style="z-index:30;" format="webp" quality={70} widths={[960, 1440, 1920, 2752]} sizes="(max-width: 580px) 960px, 116vw" loading="lazy" decoding="async" fetchpriority="low" />
+		<Image src={layer3} alt="Montanhas Próximas" class="parallax-layer layer-3" id="p-layer3" style="z-index:40;" format="webp" quality={70} widths={[960, 1440, 1920, 2752]} sizes="(max-width: 580px) 960px, 116vw" loading="lazy" decoding="async" fetchpriority="low" />
+		<Image src={layer2} alt="Montanhas em Foco" class="parallax-layer layer-2" id="p-layer2" style="z-index:50;" format="webp" quality={70} widths={[960, 1440, 1920, 2752]} sizes="(max-width: 580px) 960px, 116vw" loading="lazy" decoding="async" fetchpriority="low" />
 		<div class="parallax-text-overlay" id="p-text" style="z-index:55;">
 			<div class="parallax-badge">Tradição Murano</div>
 			<h2 class="parallax-title">Tempo &amp; Natureza</h2>
@@ -23,7 +24,7 @@ import layer6 from '../assets/parallax/6.png';
 				relojoaria moderna.
 			</p>
 		</div>
-		<img src={layer1.src} alt="Rochas de Primeiro Plano" class="parallax-layer layer-1" id="p-layer1" style="z-index:60;" />
+		<Image src={layer1} alt="Rochas de Primeiro Plano" class="parallax-layer layer-1" id="p-layer1" style="z-index:60;" format="webp" quality={70} widths={[960, 1440, 1920, 2752]} sizes="(max-width: 580px) 1100px, 116vw" loading="lazy" decoding="async" fetchpriority="low" />
 	</div>
 </section>
 

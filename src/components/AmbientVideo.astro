@@ -1,9 +1,9 @@
 <section class="video-section section-full" data-ambient-video-section>
 	<div class="video-container">
 		<div class="video-frame">
-			<video autoplay muted loop playsinline class="ambient-video">
+			<video autoplay muted loop playsinline preload="none" class="ambient-video" data-ambient-video>
 				<source
-					src="https://www.venezianico.com/cdn/shop/videos/c/vp/ae83d3a08e4d48c4af8fcbf3c1f29c25/ae83d3a08e4d48c4af8fcbf3c1f29c25.HD-1080p-7.2Mbps-39247645.mp4?v=0"
+					data-src="https://www.venezianico.com/cdn/shop/videos/c/vp/ae83d3a08e4d48c4af8fcbf3c1f29c25/ae83d3a08e4d48c4af8fcbf3c1f29c25.HD-1080p-7.2Mbps-39247645.mp4?v=0"
 					type="video/mp4"
 				/>
 				Seu navegador não suporta a reprodução de vídeos.
@@ -78,20 +78,45 @@
 
 <script>
 	const ambientSections = document.querySelectorAll<HTMLElement>('[data-ambient-video-section]');
+	const ambientMobileQuery = window.matchMedia('(max-width: 768px)');
 	let ambientFrame = 0;
+
+	const ambientVideoObserver = new IntersectionObserver(
+		(entries) => {
+			entries.forEach((entry) => {
+				const video = entry.target.querySelector<HTMLVideoElement>('[data-ambient-video]');
+				const source = video?.querySelector<HTMLSourceElement>('source[data-src]');
+
+				if (entry.isIntersecting && video) {
+					if (source?.dataset.src) {
+						source.src = source.dataset.src;
+						delete source.dataset.src;
+						video.load();
+					}
+
+					video.play().catch(() => {});
+				} else {
+					video?.pause();
+				}
+			});
+		},
+		{ rootMargin: '500px 0px', threshold: 0.01 },
+	);
+
+	ambientSections.forEach((section) => ambientVideoObserver.observe(section));
 
 	const updateAmbientVideo = () => {
 		ambientFrame = 0;
 		const viewportWidth = window.innerWidth;
 		const viewportHeight = window.innerHeight;
-		const isMobile = window.matchMedia('(max-width: 768px)').matches;
+		const isMobile = ambientMobileQuery.matches;
 		const initialWidth = viewportWidth * (isMobile ? 0.88 : 0.72);
 		const initialHeight = viewportHeight * (isMobile ? 0.58 : 0.66);
 		const initialRadius = isMobile ? 12 : 16;
 
 		ambientSections.forEach((section) => {
 			const rect = section.getBoundingClientRect();
-			const scrollRange = Math.max(1, section.offsetHeight - viewportHeight);
+			const scrollRange = Math.max(1, rect.height - viewportHeight);
 			const progress = Math.max(0, Math.min(1, -rect.top / scrollRange));
 			const easedProgress = progress * progress * (3 - 2 * progress);
 			const currentWidth = initialWidth + (viewportWidth - initialWidth) * easedProgress;
