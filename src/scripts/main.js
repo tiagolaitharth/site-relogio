@@ -56,7 +56,11 @@ const pLayers = [
 const pText = document.getElementById('p-text');
 const mobileParallaxQuery = window.matchMedia('(max-width: 580px)');
 const tabletParallaxQuery = window.matchMedia('(max-width: 1024px)');
+const mobileParallaxOffsets = [300, 230, 170, 115, 65, 12];
+const tabletParallaxOffsets = [540, 420, 310, 200, 90, 15];
+const desktopParallaxOffsets = [880, 660, 440, 250, 100, 15];
 let parallaxFrameRequested = false;
+let parallaxIsNearViewport = !('IntersectionObserver' in window);
 
 const updateParallax = () => {
 	if (!parallaxSection || !pText || pLayers.some((layer) => !layer)) return;
@@ -70,11 +74,11 @@ const updateParallax = () => {
 	const isMobile = mobileParallaxQuery.matches;
 	const isTablet = tabletParallaxQuery.matches;
 	const maxOffsets = isMobile
-		? [300, 230, 170, 115, 65, 12]
+		? mobileParallaxOffsets
 		: isTablet
-			? [540, 420, 310, 200, 90, 15]
-			: [880, 660, 440, 250, 100, 15];
-	const scaleDepth = isMobile ? 0.04 : isTablet ? 0.065 : 0.09;
+			? tabletParallaxOffsets
+			: desktopParallaxOffsets;
+	const scaleDepth = isMobile ? 0.025 : isTablet ? 0.065 : 0.09;
 
 	pLayers.forEach((layer, index) => {
 		const yTranslate = maxOffsets[index] * factor;
@@ -99,7 +103,7 @@ const updateParallax = () => {
 };
 
 const requestParallaxUpdate = () => {
-	if (parallaxFrameRequested) return;
+	if (!parallaxIsNearViewport || parallaxFrameRequested) return;
 	parallaxFrameRequested = true;
 
 	requestAnimationFrame(() => {
@@ -107,6 +111,18 @@ const requestParallaxUpdate = () => {
 		parallaxFrameRequested = false;
 	});
 };
+
+if (parallaxSection && 'IntersectionObserver' in window) {
+	const parallaxVisibilityObserver = new IntersectionObserver(
+		([entry]) => {
+			parallaxIsNearViewport = entry.isIntersecting;
+			if (parallaxIsNearViewport) requestParallaxUpdate();
+		},
+		{ rootMargin: '100% 0px' },
+	);
+
+	parallaxVisibilityObserver.observe(parallaxSection);
+}
 
 window.addEventListener('scroll', requestParallaxUpdate, { passive: true });
 window.addEventListener('resize', requestParallaxUpdate);

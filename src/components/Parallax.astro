@@ -1,20 +1,41 @@
 ---
-import { Image } from 'astro:assets';
+import { Image, getImage } from 'astro:assets';
 import layer1 from '../assets/parallax/1.png';
 import layer2 from '../assets/parallax/2.png';
 import layer3 from '../assets/parallax/3.png';
 import layer4 from '../assets/parallax/4.png';
 import layer5 from '../assets/parallax/5.png';
 import layer6 from '../assets/parallax/6.png';
+
+const [mobileLayer1, mobileLayer2, mobileLayer3, mobileLayer4, mobileLayer5, mobileLayer6] = await Promise.all(
+	[layer1, layer2, layer3, layer4, layer5, layer6].map((src) =>
+		getImage({ src, width: 1200, format: 'webp', quality: 70 }),
+	),
+);
 ---
 
 <section class="parallax-section" id="artesanal">
 	<div class="parallax-container">
-		<Image src={layer6} alt="Céu e Distância" class="parallax-layer layer-6" id="p-layer6" style="z-index:10;" format="webp" quality={70} widths={[960, 1440, 1920, 2752]} sizes="(max-width: 580px) 960px, 116vw" loading="lazy" decoding="async" fetchpriority="low" />
-		<Image src={layer5} alt="Montanhas Distantes" class="parallax-layer layer-5" id="p-layer5" style="z-index:20;" format="webp" quality={70} widths={[960, 1440, 1920, 2752]} sizes="(max-width: 580px) 960px, 116vw" loading="lazy" decoding="async" fetchpriority="low" />
-		<Image src={layer4} alt="Montanhas Intermediárias" class="parallax-layer layer-4" id="p-layer4" style="z-index:30;" format="webp" quality={70} widths={[960, 1440, 1920, 2752]} sizes="(max-width: 580px) 960px, 116vw" loading="lazy" decoding="async" fetchpriority="low" />
-		<Image src={layer3} alt="Montanhas Próximas" class="parallax-layer layer-3" id="p-layer3" style="z-index:40;" format="webp" quality={70} widths={[960, 1440, 1920, 2752]} sizes="(max-width: 580px) 960px, 116vw" loading="lazy" decoding="async" fetchpriority="low" />
-		<Image src={layer2} alt="Montanhas em Foco" class="parallax-layer layer-2" id="p-layer2" style="z-index:50;" format="webp" quality={70} widths={[960, 1440, 1920, 2752]} sizes="(max-width: 580px) 960px, 116vw" loading="lazy" decoding="async" fetchpriority="low" />
+		<picture class="parallax-picture">
+			<source media="(max-width: 580px)" srcset={mobileLayer6.src} type="image/webp" />
+			<Image src={layer6} alt="Céu e Distância" class="parallax-layer layer-6" id="p-layer6" style="z-index:10;" format="webp" quality={70} widths={[1440, 1920, 2752]} sizes="116vw" loading="lazy" decoding="async" fetchpriority="low" />
+		</picture>
+		<picture class="parallax-picture">
+			<source media="(max-width: 580px)" srcset={mobileLayer5.src} type="image/webp" />
+			<Image src={layer5} alt="Montanhas Distantes" class="parallax-layer layer-5" id="p-layer5" style="z-index:20;" format="webp" quality={70} widths={[1440, 1920, 2752]} sizes="116vw" loading="lazy" decoding="async" fetchpriority="low" />
+		</picture>
+		<picture class="parallax-picture">
+			<source media="(max-width: 580px)" srcset={mobileLayer4.src} type="image/webp" />
+			<Image src={layer4} alt="Montanhas Intermediárias" class="parallax-layer layer-4" id="p-layer4" style="z-index:30;" format="webp" quality={70} widths={[1440, 1920, 2752]} sizes="116vw" loading="lazy" decoding="async" fetchpriority="low" />
+		</picture>
+		<picture class="parallax-picture">
+			<source media="(max-width: 580px)" srcset={mobileLayer3.src} type="image/webp" />
+			<Image src={layer3} alt="Montanhas Próximas" class="parallax-layer layer-3" id="p-layer3" style="z-index:40;" format="webp" quality={70} widths={[1440, 1920, 2752]} sizes="116vw" loading="lazy" decoding="async" fetchpriority="low" />
+		</picture>
+		<picture class="parallax-picture">
+			<source media="(max-width: 580px)" srcset={mobileLayer2.src} type="image/webp" />
+			<Image src={layer2} alt="Montanhas em Foco" class="parallax-layer layer-2" id="p-layer2" style="z-index:50;" format="webp" quality={70} widths={[1440, 1920, 2752]} sizes="116vw" loading="lazy" decoding="async" fetchpriority="low" />
+		</picture>
 		<div class="parallax-text-overlay" id="p-text" style="z-index:55;">
 			<div class="parallax-badge">Tradição Murano</div>
 			<h2 class="parallax-title">Tempo &amp; Natureza</h2>
@@ -24,7 +45,10 @@ import layer6 from '../assets/parallax/6.png';
 				relojoaria moderna.
 			</p>
 		</div>
-		<Image src={layer1} alt="Rochas de Primeiro Plano" class="parallax-layer layer-1" id="p-layer1" style="z-index:60;" format="webp" quality={70} widths={[960, 1440, 1920, 2752]} sizes="(max-width: 580px) 1100px, 116vw" loading="lazy" decoding="async" fetchpriority="low" />
+		<picture class="parallax-picture">
+			<source media="(max-width: 580px)" srcset={mobileLayer1.src} type="image/webp" />
+			<Image src={layer1} alt="Rochas de Primeiro Plano" class="parallax-layer layer-1" id="p-layer1" style="z-index:60;" format="webp" quality={70} widths={[1440, 1920, 2752]} sizes="116vw" loading="lazy" decoding="async" fetchpriority="low" />
+		</picture>
 	</div>
 </section>
 
@@ -73,6 +97,10 @@ import layer6 from '../assets/parallax/6.png';
 		background: linear-gradient(to top, #000 0%, transparent 100%);
 		pointer-events: none;
 		content: '';
+	}
+
+	.parallax-picture {
+		display: contents;
 	}
 
 	.parallax-layer {
@@ -174,6 +202,11 @@ import layer6 from '../assets/parallax/6.png';
 		.parallax-container::after {
 			height: 34svh;
 			background: linear-gradient(to top, #000 0%, rgb(0 0 0 / 72%) 28%, transparent 100%);
+		}
+
+		.parallax-layer {
+			filter: none;
+			opacity: .82;
 		}
 
 		.parallax-layer:not(.layer-6) {
