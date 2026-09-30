@@ -38,7 +38,10 @@ import layer6 from '../assets/parallax/6.png';
 
 	.parallax-section {
 		position: relative;
+		width: 100%;
+		max-width: 100%;
 		height: 300vh;
+		overflow-x: clip;
 		background: var(--bg-dark);
 		border-top: 1px solid var(--border-light);
 		z-index: 5;
@@ -52,9 +55,11 @@ import layer6 from '../assets/parallax/6.png';
 		align-items: center;
 		justify-content: center;
 		width: 100%;
+		max-width: 100%;
 		height: 100vh;
 		height: 100dvh;
 		overflow: hidden;
+		contain: paint;
 	}
 
 	.parallax-container::after {
@@ -221,9 +226,9 @@ import layer6 from '../assets/parallax/6.png';
 
 		.parallax-text-overlay {
 			top: 31%;
-			width: 100%;
+			width: calc(100% - 32px);
 			max-width: 430px;
-			padding: 0 28px;
+			padding: 0 12px;
 		}
 
 		.parallax-title {
