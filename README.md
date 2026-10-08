@@ -188,7 +188,6 @@ Alguns elementos foram mantidos apenas para demonstração visual: os ícones so
 
 ## Próximas melhorias
 
-- Publicar a primeira versão na Vercel;
 - Substituir dependências externas por arquivos locais quando permitido;
 - Criar rotas para os links institucionais e de coleção;
 - Integrar o formulário de newsletter a um serviço real;
